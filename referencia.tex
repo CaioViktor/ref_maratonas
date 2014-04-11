@@ -1,0 +1,67 @@
+\documentclass[a4paper,oneside,twocolumn]{article}
+\title{Refer\^{e}ncia dos Broders}
+\author{Se n\~{a}o usar a refer\^{e}ncia dos broders, a\'{i} voc\^{e} não \'{e} broder}
+
+% PACKAGES % % % % % % % % % % % %
+\usepackage[utf8]{inputenc}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage[landscape,left=1.5cm,right=.5cm,top=2.1cm,bottom=.5cm]{geometry}
+
+% COMANDOS % % % % % % % % % % % %
+\newcommand{\Cpp}[1]{\begin{center}\small\textbf{#1.cpp}\end{center}\lstinputlisting[inputencoding=latin1,language=C++,basicstyle=\ttfamily,keywordstyle=\color{Blue},commentstyle=\color{CadetBlue},stringstyle=\color{DarkOrchid},numberstyle=\color{Violet}]{cpp/#1.cpp}}
+\newcommand{\divisor}{\begin{center}\rule{375pt}{0.25pt}\end{center}}
+
+
+% CONFIG. DA PÁG % % % % % % % % %
+\linespread{1.185}
+\setlength{\columnseprule}{0.25pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R,RO]{Referência dos Broders, pág. \bfseries\thepage}
+\fancyhead[L,LO]{\bfseries\thechapter}
+\setcounter{tocdepth}{3}
+
+
+% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
+
+
+\begin{document}
+
+
+\thispagestyle{fancy}
+
+\maketitle
+
+\tableofcontents
+
+\clearpage
+
+
+% MATEMÁTICA % % % % % % % % % % %
+\section{Matemática}
+
+\subsection{Teoria dos Números}
+
+
+\subsubsection{Achando números dos primos}
+\Cpp{teste}
+\divisor
+
+
+
+\subsubsection{Lorem Ipsum}
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pharetra sed nibh vitae pulvinar. Aenean elementum aliquet egestas. Vestibulum nibh massa, ullamcorper eget metus vitae, tincidunt iaculis ligula. Sed ac iaculis elit. Duis rhoncus placerat ultricies. Aliquam non viverra lacus. Integer eu dapibus turpis. Nam eget turpis justo.
+
+Nunc dictum bibendum eros, aliquam ultrices quam luctus eu. Ut ac malesuada mi. Curabitur tempor elit massa, eget iaculis sapien lobortis a. Vestibulum hendrerit ligula ut arcu consectetur tempor. Cras porttitor, orci porttitor laoreet luctus, elit risus luctus nibh, sit amet egestas ante orci ac mauris. Nunc et tortor ac tortor faucibus posuere. Vestibulum eu semper libero, nec dapibus sem. Vivamus ante arcu, faucibus dictum elit quis, volutpat convallis justo. Praesent quis lacus vel enim vestibulum ultrices.
+\divisor
+
+
+
+\subsubsection{Achando números dos tios}
+\Cpp{teste}
+\divisor
+
+\end{document}
