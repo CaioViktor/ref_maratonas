@@ -7,11 +7,11 @@
 
 
 \subsubsection{Multiplicative/Modular Inverse}
-Encontra X tal que a $\times$ x = $\frac{a}{b}$ (mod m), ou seja, x é o equivalente do inverso do módulo de b.
+Encontra X tal que a $\times$ x = $\frac{a}{b}$ (mod m), ou seja, x é o equivalente do inverso do módulo de b. Implementação usando Euclidean Algorithm.
 \Cpp{\detokenize{matematica/teoria_dos_numeros/modular_inverse}}
 \divisor
 
-\subsubsection{Exponenciação modular}
+\subsubsection{Exponentiation by squaring}
 Calcula $a^b$ (mod m) em tempo O($\log{b}$)
 \Cpp{\detokenize{matematica/teoria_dos_numeros/modpow}}
 \divisor
@@ -27,5 +27,47 @@ Calcula $a^b$ (mod m) em tempo O($\log{b}$)
 Integra $f(x)$ de $a$ a $b$. Necessário implementar $f(x)$.
 \Cpp{matematica/calculo/simpson}  
 % Problema bom pra testar: UVA 12528 - Environment Protection (Nacional 2012)
+
+\divisor
+
+
+% % % % % % % % % % % % %
+% % ALGEBRA LINEAR
+% % % % % % % % % % % % %
+
+\subsection{Álgebra Linear}
+
+\subsubsection{Recorrências lineares por matriz}
+Em uma recorrência linear, pode-se encontrar o n-ésimo elemento em $O(\log{n})$ usando exponenciação de matrizes. Por exemplo, na sequência de Fibonacci temos:
+\\ $f(n) = f(n)$
+\\ $f(n+1) = f(n)+f(n-1)$
+\\Na forma matricial, temos:
+\\
+$\left( \begin{array}{c}
+f(n+1) \\
+f(n) \end{array} \right)
+ = 
+\left( \begin{array}{c}
+f(n) + f(n-1) \\
+f(n) \end{array} \right)
+ = T \times
+\left( \begin{array}{c}
+f(n) \\
+f(n-1) \end{array} \right)$
+\\ Onde T é a matriz de transformação da recorrência e pode-se notar que:
+$T=\left( \begin{array}{cc}
+1 & 1 \\
+1 & 0 \end{array} \right)$
+\\ Seguindo a recorrência e lembrando que $f(0) = f(1) = 1$, tem-se que:
+\\$\left( \begin{array}{c}
+f(n+1) \\
+f(n) \end{array} \right) = T^n \times
+\left( \begin{array}{c}
+1 \\
+1 \end{array} \right)$
+\\ No caso geral, se a matriz T for suficientemente pequena, pode-se calcular o n-ésimo item da recorrência ao se calcular $T^n$. A implementação em $O(\log{n})$ é obtida usando exponentiation by squaring, caso T seja suficientemente pequeno (multiplica\c{c}\~{a}o de matrizes: $O(n^3)$).
+% Para treinar/testar: http://www.urionlinejudge.com.br/judge/problems/view/1422
+% Mais detalhes: http://fusharblog.com/solving-linear-recurrence-for-programming-contest/
+
 
 \divisor
