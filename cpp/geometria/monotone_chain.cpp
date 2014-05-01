@@ -1,6 +1,10 @@
+inline ll orientation(point p, point q, point r){
+	return (q.second-p.second)*(r.first-p.first) - (q.first-p.first)*(r.second-p.second);
+}
 
 set<point> pts;
 vector<point> up, dn;
+
 void convexHull(){
 	up.assign(pts.size(),point());
 	dn.assign(pts.size(),point());
