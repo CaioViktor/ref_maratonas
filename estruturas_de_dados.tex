@@ -13,6 +13,25 @@
 \divisor
 
 \subsection{Bitmasks}
+\subsubsection{Operações Básicas}
+\begin{tabular}{l | l}
+		Ligar o i-ésimo bit: 		&   \texttt{S |= (1 << i)} 			\\
+		Desligar o i-ésimo bit: 	&	\texttt{S \&= \textasciitilde(1 << i)} 		\\
+		Toggle no i-ésimo bit:		&   \texttt{S \textasciicircum= (1 << i)} 			\\
+		Checar se i-ésimo bit é 0  	&	\texttt{(S \& (1 << i)) == 0} 	\\
+		Checar se o i-ésimo bit é 1 &	\texttt{(S \& (1 << i)) != 0} 	\\
+		Pegar o primeiro bit ligado	& 	\texttt{T = (S \& (-S))} 		\\
+		Ligar os primeiros n bits	& 	\texttt{S = (1 << n) - 1} 		\\
+		Desligar todos os bits		& 	\texttt{S = 0} 
+\end{tabular}
+
+\subsubsection{Combinações}
+Gera as bitmasks de todas combinações de K elementos em N:
+\Cpp{\detokenize{estruturas_de_dados/combinacoes_bitmask}}
+
+\subsubsection{Contar quantidade de bits ligados}
+\Cpp{\detokenize{estruturas_de_dados/bitmask_count}}
+
 \subsubsection{XOR de sequ\^{e}ncia}
 Para calcular o XOR de uma sequ\^{e}ncia de 1 a N.
 \Cpp{\detokenize{estruturas_de_dados/seq_xors}}
