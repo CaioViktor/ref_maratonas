@@ -5,3 +5,19 @@ Menor cut para desconectar um grafo conectado. Vers\~{a}o $O(V^3)$, usando lista
 \Cpp{\detokenize{grafos/flow/stoer_wagner_n3}}
 % Problema: http://community.topcoder.com/stat?c=problem_statement&pm=7246&rd=10658
 \divisor
+
+\subsection{Grafos Bipartidos}
+
+\subsubsection{MCMB (Hopcroft Karp)}
+\Cpp{\detokenize{grafos/hopcroft_karp}}
+
+\subsubsection{Maximum Independent Set (MIS)}
+Um conjunto independente de um grafo G é um conjunto de vértices onde nenhum deles tem uma aresta ligando a outro.
+
+Num grafo bipartido: $MIS = V - MCMB$
+
+\subsubsection{Min Vertex Cover (Teorema de König)}
+Num grafo bipartido: $Min Vertex Cover = MCMB$
+
+Observação: Em um grafo bipartido, o conjunto \textbf{menor é o Min Vertex Cover} e o conjunto \textbf{maior é o Max Independent Set}.
+\divisor
