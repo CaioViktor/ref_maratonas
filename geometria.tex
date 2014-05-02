@@ -19,14 +19,23 @@ Os vetores "up" e "down" s\~{a}o, respectivamente, o convex hull superior e infe
 \subsection{Rotating Calipers}
 
 T\'{e}cnica para achar os pares de pontos antipodais. Primeiro calcula-se a convex hull do set para ent\~{a}o aplicar o Rotating Calipers.
-% Em construção: Faltam outros problemas
 
 \subsubsection{Di\^{a}metro de um set de pontos}
 Exemplo mais b\'{a}sico de rotating calipers. up e dn v\^{e}m do Monotone Chain.
 \Cpp{\detokenize{geometria/rotating_calipers/polygon_diam}}
-%problema: http://www.spoj.com/problems/TFOSS/
+% problema: SPOJ TFOSS, UVa 1111 (nao imprimir ultimo \n no do UVa)
 \divisor
 
 \subsubsection{Minimum enclosing rectangle}
 Basta usar 4 calipers (diferente das 2 do problema do di\^{a}metro).
+% problema: UVa 12307
+\divisor
+
+\subsubsection{Maior dist\^{a}ncia entre pol\'{i}gonos convexos}
+Considerando que a maior dist\^{a}ncia \'{e} o par de v\'{e}rtices mais dist\^{a}ntes entre si, o problema \'{e}  resolvido usando um caliper em cada pol\'{i}gono.
+\divisor
+
+\subsubsection{Bridges entre pol\'{i}gonos convexos (convex hull merge)}
+Colocando um caliper em cada pol\'{i}gono, existir\~{a}o duas bridges, que s\~{a}o pares de pontos co-podais (pontos em que se pode tra\c{c}ar uma reta em cada, de forma que elas sejam paralelas e todos os pontos de ambos os sets estejam em somente um dos lados).
+\\ Mais f\'{a}cil gerar o convex hull novamente, em $O(n \log{n})$.
 \divisor
