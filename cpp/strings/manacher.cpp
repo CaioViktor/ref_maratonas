@@ -1,50 +1,57 @@
-// Transform S into T.
-// For example, S = "abba", T = "^#a#b#b#a#$".
-// ^ and $ signs are sentinels appended to each
-// end to avoid bounds checking
-string preProcess(string s) {
-  int n = s.length();
-  if (n == 0) return "^$";
-  string ret = "^";
-  for (int i = 0; i < n; i++)
-    ret += "#" + s.substr(i, 1);
- 
-  ret += "#$";
-  return ret;
-}
- 
-string longestPalindrome(string s) {
-  string T = preProcess(s);
-  int n = T.length();
-  int *P = new int[n];
-  int C = 0, R = 0;
-  for (int i = 1; i < n-1; i++) {
-    int i_mirror = 2*C-i; // equals to i' = C - (i-C)
-    
-    P[i] = (R > i) ? min(R-i, P[i_mirror]) : 0;
-    
-    // Attempt to expand palindrome centered at i
-    while (T[i + 1 + P[i]] == T[i - 1 - P[i]])
-      P[i]++;
- 
-    // If palindrome centered at i expand past R,
-    // adjust center based on expanded palindrome.
-    if (i + P[i] > R) {
-      C = i;
-      R = i + P[i];
-    }
-  }
- 
-  // Find the maximum element in P.
-  int maxLen = 0;
-  int centerIndex = 0;
-  for (int i = 1; i < n-1; i++) {
-    if (P[i] > maxLen) {
-      maxLen = P[i];
-      centerIndex = i;
-    }
-  }
-  delete[] P;
-  
-  return s.substr((centerIndex - 1 - maxLen)/2, maxLen);
+int manacher(const string &s) {
+	int len = s.size(), ans = 0;
+	if(len == 0) return 0;
+
+	int m[2*len+1];
+	m[0] = 0;
+	m[1] = 1;
+	// "cur" is the current center
+	// "r" is the right bound of the palindrome
+	// that centered at current center
+	int cur, r;
+	r = 2;
+	cur = 1;
+
+	for(int p2=2; p2<2*len+1; p2++) {
+		int p1 = cur- (p2-cur);
+		//if p1 is negative, we need to 
+		//move "cur" forward
+		while(p1 < 0) {
+			cur++;
+			r = m[cur] + cur;
+			p1 = cur- (p2-cur);
+		}
+
+		//If the first character of t is 
+		//strictly on the right of the 
+		// first character of s
+		if(m[p1] < r - p2)
+			m[p2] = m[p1];
+		//otherwise
+		else {
+			//reset "cur" 
+			cur = p2;
+			int k = r-p2;
+			if(k<0) k = 0;
+			while(1) {
+				if((p2+k+1)&1) {
+					if(p2+k+1 < 2*len+1 && p2-k-1 >=0 && s[(p2+k)/2] == s[(p2-k-2)/2])
+						k++;
+					else
+						break;
+				}
+				else {
+					if(p2+k+1 < 2*len+1 && p2-k-1 >=0)
+						k++;
+					else
+						break;
+				}
+			}
+
+			r = p2+k;
+			m[p2] = k;
+		}
+		ans = max(ans,m[p2]);
+	}
+	return ans;
 }
