@@ -32,12 +32,12 @@ Basta usar 4 calipers (diferente das 2 do problema do di\^{a}metro).
 \divisor
 
 \subsubsection{Maior dist\^{a}ncia entre pol\'{i}gonos convexos}
-Considerando que a maior dist\^{a}ncia \'{e} o par de v\'{e}rtices mais dist\^{a}ntes entre si, o problema \'{e}  resolvido usando um caliper em cada pol\'{i}gono.
+Considerando que a maior dist\^{a}ncia \'{e} o par de v\'{e}rtices mais dist\^{a}ntes entre si, o problema \'{e}  resolvido usando um caliper em cada pol\'{i}gono e tratando tal dist\^{a}ncia como um di\^{a}metro de um pol\'{i}gono convexo.
 \divisor
 
 \subsubsection{Bridges entre pol\'{i}gonos convexos (convex hull merge)}
 Colocando um caliper em cada pol\'{i}gono, existir\~{a}o duas bridges, que s\~{a}o pares de pontos co-podais (pontos em que se pode tra\c{c}ar uma reta em cada, de forma que elas sejam paralelas e todos os pontos de ambos os sets estejam em somente um dos lados).
-\\ Mais f\'{a}cil gerar o convex hull novamente, em $O(n \log{n})$.
+\\ Mais f\'{a}cil gerar o convex hull novamente, em $O(n \log{n})$, apesar de a t\'{e}cnica dos rotating calipers ser mais r\'{a}pida ($O(n)$);
 \divisor
 
 \subsection{Fun\c{c}\~{o}es b\'{a}sicas}
