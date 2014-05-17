@@ -1,5 +1,4 @@
-// PLL: pair de long long
-pll t[MAX_N][MLOGN];
+pll t[MAX_N][MLOGN]; // first: pai do segmento, second: resposta
 void precomputa(){
 	for(int u = 0; u < n; u++){
 		for(int j = 0; j < (int)child[u].size(); j++){
@@ -25,7 +24,6 @@ int menor_aresta(int a, int b){
 	if(L[H[a]] < L[H[b]]) swap(a,b); // b eh pai de a (L eh profundida-
 									 // de do no, se usar LCA do CP3)
 	
-	//~ cout << a << "!=" << b << ',' << L[H[a]] << '-' << L[H[b]] << endl;
 	ll ans = 1e9;
 	for(int i = MLOGN-1; i >= 0 && a != b; i--){
 		if(L[H[b]] <= L[H[a]] - (1 << i)){
