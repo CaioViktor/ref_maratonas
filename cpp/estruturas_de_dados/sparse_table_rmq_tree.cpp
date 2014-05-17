@@ -2,7 +2,7 @@ void precomputa(){
 	for(int u = 0; u < n; u++){
 		for(int j = 0; j < (int)AdjList[u].size(); j++){
 			ii v = AdjList[u][j];
-			t[v.first][0].pai = i;
+			t[v.first][0].pai = u;
 			t[v.first][0].val = v.second;
 		}
 	}
