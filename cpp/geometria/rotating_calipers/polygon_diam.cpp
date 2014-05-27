@@ -11,7 +11,8 @@ ll rotatingCalipers(){
 		else if(j == 0) i++;
 		else{
 			// Verifica qual o menor angulo a ser rotacionado p utilizar na rotacao
-			if(ccw(point(0,0), toVec(up[i], up[i+1]), toVec(dn[j],dn[j-1])))
+			if((up[i+1].second - up[i].second) * (dn[j].first - dn[j-1].first)
+				> (dn[j].second - dn[j-1].second) * (up[i+1].first - up[i].first ))
 				i++;
 			else
 				j--;
