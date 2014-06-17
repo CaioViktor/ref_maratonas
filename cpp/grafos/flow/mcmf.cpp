@@ -1,6 +1,6 @@
 
 #define INF 0x7fffffffffffffffLL
-#define MAXN 310
+#define MAXN 2222
 #define MAXM 22222
 
 using namespace std;
