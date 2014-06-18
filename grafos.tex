@@ -24,6 +24,15 @@ Num grafo bipartido: $Min Vertex Cover = MCMB$
 Observação: Em um grafo bipartido, o conjunto \textbf{menor é o Min Vertex Cover} e o conjunto \textbf{maior é o Max Independent Set}.
 \divisor
 
+\subsubsection{Max Weighted Independent Set}
+Em um grafo bipartido, ao se adicionar pesos aos v\'{e}rtices, temos que o Max Weighted Independent Set \'{e} o set com a maior soma dos pesos dos v\'{e}rtices, tal que n\~{a}o haja uma aresta entre dois v\'{e}rtices deste set.
+
+Pode-se resolver com Max flow: Adiciona um Source e um Sink. Nas arestas do grafo original, coloca-se $cap=\infty$. Nas arestas vindo da source, coloca-se o peso dos v\'{e}rtices correspondentes e faz-se o mesmo para as arestas chegando em sink.
+
+O Max Weighted Independent Set ser\'{a} a soma dos pesos dos v\'{e}rtices menos o Max Flow obtido do grafo.
+% problema: http://www.codechef.com/problems/TWOCOMP
+\divisor
+
 \subsection{MCMF}
 Edmonds Karp com D\"{i}jkstra. Complexidade: $O(V*E*max(Maior cost,Maior cap))$
 % problema: https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&category=569&page=show_problem&problem=4277
