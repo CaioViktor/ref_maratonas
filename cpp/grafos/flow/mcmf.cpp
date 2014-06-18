@@ -10,6 +10,11 @@ int d[MAXN],cst[MAXM];
 
 int e,n;
 
+void reset(){
+    memset(h,-1,sizeof h);
+    e = 0;
+}
+
 void add(int u_, int v_, ll cst_, ll w_){
     u[e]=u_;      v[e]=v_;
     flow[e]=w_;     cst[e]=cst_;
@@ -66,10 +71,7 @@ int mcmf(int s, int t){
     return f;
 }
 
-// Exemplo de utilizacao
-memset(h,-1,sizeof h);
-e = 0;
-
+// Exemplo de utilizacao:
 // Para cada edge no grafo, adiciona-se a edge inversa logo apos, com o
 // peso negativo e capacidade nula
 add(u,v, w, cap);
