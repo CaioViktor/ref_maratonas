@@ -10,9 +10,14 @@ int d[MAXN],cst[MAXM];
 
 int e,n;
 
-void reset(){
+void start_mcmf(){
     memset(h,-1,sizeof h);
     e = 0;
+}
+
+void add_edge(int u_, int v_, int cst_, int w_){
+  add(u_, v_, cst_, w_);
+  add(v_, u_, -cst_, 0);
 }
 
 void add(int u_, int v_, ll cst_, ll w_){
@@ -72,7 +77,7 @@ int mcmf(int s, int t){
 }
 
 // Exemplo de utilizacao:
-// Para cada edge no grafo, adiciona-se a edge inversa logo apos, com o
-// peso negativo e capacidade nula
-add(u,v, w, cap);
-add(v,u, -w, 0);
+start_mcmf();
+add_edge(u,v, w, cap);
+
+mcmf(s,t); // Retorna o max flow. min cost eh a var global c
