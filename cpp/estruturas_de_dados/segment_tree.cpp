@@ -77,7 +77,7 @@ void st_create(vni &st, const vni &A) {
 
 NodeInfo st_query(vni &st, const vni &A, int vertex, 
 int L, int R, int i, int j) {
-  if (i >  R || j <  L) return NodeInfo::initialValue();   
+  if (i >  R || j <  L) return NodeInfo::outOfRange();   
   if (L >= i && R <= j) return st[vertex];            
 
   NodeInfo p1 = st_query(st, A, 2 * vertex, L, 
