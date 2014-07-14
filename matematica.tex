@@ -5,6 +5,23 @@
 % % % % % % % % % % % % %
 \subsection{Teoria dos Números e Matemática Discreta}
 
+\subsubsection{MMC}
+O MMC de dois n\'{u}meros pode ser calculado da seguinte forma:
+\\ Se:
+  \[
+  \left \{
+  \begin{tabular}{c}
+    $X=p1^{e11}*p2^{e12}*...*pn^{e1n}$ \\
+    $Y=p1^{e21}*p2^{e22}*...*pn^{e2n}$
+   \end{tabular}
+   \right.
+   \]
+\\ 
+\\ \centerline{$MMC(X,Y)=p1^{max(e11,e21)}*p2^{max(e12,e22)}*...*pn^{max(e1n,e2n)}$}
+\\
+\\ Onde $px$ \'{e} um fator primo presente em qualquer um dos dois n\'{u}meros ($ekx$ pode ser zero, n\~{a}o afeta o resultado final). Isso \'{e} \'{u}til quando o MMC pode ser muito grande e se quer calcular MMC \% MOD.
+
+\divisor
 
 \subsubsection{Multiplicative/Modular Inverse}
 Encontra X tal que a $\times$ x = $\frac{a}{b}$ (mod m), ou seja, x é o equivalente do inverso do módulo de b. Implementação usando Euclidean Algorithm.
