@@ -33,6 +33,24 @@ Calcula $a^b$ (mod m) em tempo O($\log{b}$)
 \Cpp{\detokenize{matematica/teoria_dos_numeros/modpow}}
 \divisor
 
+% % % % % % % % % % % % %
+% % COMBINATORIA
+% % % % % % % % % % % % %
+
+\subsection{Combinat\'{o}ria}
+
+\subsubsection{Principo da inclus\~{a}o-exclus\~{a}o}
+Generaliza a contagem da uni\~{a}o de conjuntos finitos. Por exemplo, para tr\^{e}s conjuntos, tem-se:
+
+$|A \cup B \cup C| = |A| + |B| + |C| - (|A \cap B| + |A \cap C| + |B \cap C|) + |A \cap B \cap C|$
+
+Ou seja, a cada passo \'{e} corrigido o somat\'{o}rio, removendo ou adicionando as interse\c{c}\~{o}es. De forma gen\'{e}rica, tem-se:
+
+$|A_1 \cup ... \cup A_n| = \sum_{k=1}^{n} ((-1)^{k+1}*(\sum_{1 \leq i_1 < ... < i_k \leq n} |A_{i1} \cap ... \cap A_{ik}|))$
+
+Onde $k$ \'{e} a quantidade de itens na contagem da interse\c{c}\~{a}o.
+
+\divisor
 
 % % % % % % % % % % % % %
 % % CÁLCULO
