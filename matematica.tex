@@ -39,7 +39,7 @@ Calcula $a^b$ (mod m) em tempo O($\log{b}$)
 
 \subsection{Combinat\'{o}ria}
 
-\subsubsection{Principo da inclus\~{a}o-exclus\~{a}o}
+\subsubsection{Princ\'{i}pio da inclus\~{a}o-exclus\~{a}o}
 Generaliza a contagem da uni\~{a}o de conjuntos finitos. Por exemplo, para tr\^{e}s conjuntos, tem-se:
 
 $|A \cup B \cup C| = |A| + |B| + |C| - (|A \cap B| + |A \cap C| + |B \cap C|) + |A \cap B \cap C|$
@@ -51,6 +51,18 @@ $|A_1 \cup ... \cup A_n| = \sum_{k=1}^{n} ((-1)^{k+1}*(\sum_{1 \leq i_1 < ... < 
 Onde $k$ \'{e} a quantidade de itens na contagem da interse\c{c}\~{a}o.
 
 \divisor
+
+\subsubsection{Stars and Bars}
+\textbf{Teorema 1}: Para quaisquer $n$ e $k$ positivos e inteiros, o n\'{u}mero de listas ordenadas distintas com $k$ n\'{u}meros \textbf{inteiros positivos} e soma igual a $n$ \'{e} ${n-1 \choose k-1}$ \\
+
+\textbf{Teorema 2}: Para quaisquer $n$ e $k$ naturais, o n\'{u}mero de listas ordenadas distintas com $k$ n\'{u}meros \textbf{inteiros n\~{a}o negativos} e soma igual a $n$ \'{e} ${n+k-1 \choose n}$
+
+\divisor
+
+\subsubsection{Teorema de Lucas}
+
+${n \choose k} \bmod{p} = {n \bmod{p} \choose k \bmod{p}}$
+
 
 % % % % % % % % % % % % %
 % % CÁLCULO
