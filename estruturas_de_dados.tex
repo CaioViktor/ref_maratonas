@@ -44,3 +44,12 @@ Para calcular o XOR de uma sequ\^{e}ncia de 1 a N.
 \Cpp{\detokenize{estruturas_de_dados/seq_xors}}
 % Explica\c{c}\~{a}o: http://stackoverflow.com/questions/3932346/direct-formula-for-summing-xor
 \divisor
+
+\subsection{DP Optimization}
+\subsubsection{Convex hull trick}
+Nesse caso, as linhas a serem adicionadas est\~{a}o ordenadas por slope (M). Caso n\~{a}o seja poss\'{i}vel ordenar linhas/queries de antem\~{a}o, usar dois sets:\\
+- Um com as linhas ordenadas por slope: ao adicionar uma linha, fazer o mesmo teste de irrelevancia para seus vizinhos\\
+- Outro set ordenado pelo ponto de interse\c{c}\~{a}o com a linha da esquerda($l_i$): para uma query, a linha que responde \'{e} a linha com o maior valor de $l_i$ menor que o X da query.
+\Cpp{\detokenize{estruturas_de_dados/convex_hull_trick}}
+
+\divisor
