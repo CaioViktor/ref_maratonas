@@ -1,6 +1,5 @@
 struct node{
   node * child[26];
-  int max_d;
   char letter;
   node(){
     for(int i = 0; i < 26; i++) child[i] = NULL;
