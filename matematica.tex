@@ -77,6 +77,13 @@ Integra $f(x)$ de $a$ a $b$. Necessário implementar $f(x)$.
 
 \divisor
 
+\subsubsection{FFT}
+Faz multiplica\c{c}\~{a}o de polin\^{o}mios de grau $n$ em $O(n*log(n))$.\\
+Para o algor\'{i}tmo funcionar, $n=2^k$. Se um polin\^{o}mio n\~{a}o tiver grau $2^k$, adicionar coeficientes nulos at\'{e} atingir a pr\'{o}xima pot\^{e}ncia de dois.\\
+Lembrar que na multiplica\c{c}\~{a}o o polin\^{o}mio resultante ter\'{a} grau $2*n$, portanto adicionar zeros na frente dos polin\^{o}mios a serem multiplicados, deixando-os com grau $2^{k+1}$.
+\Cpp{\detokenize{matematica/calculo/fft}}
+
+\divisor
 
 % % % % % % % % % % % % %
 % % ALGEBRA LINEAR
