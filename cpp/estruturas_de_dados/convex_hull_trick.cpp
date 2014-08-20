@@ -36,9 +36,11 @@ ll query(ll x){
   return lines[pointer].m*x + lines[pointer].b;
 }
 
+void beg_cvt(){
+  hbl = pointer = 0;
+}
 
 // Exemplo:
-hbl = pointer = 0;
 for(int i = 0; i < n; i++){
   add_line(m[i],b[i]);
   query(x[i]);
