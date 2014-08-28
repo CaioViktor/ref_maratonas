@@ -1,5 +1,43 @@
 typedef long double ld;
+
+// usar o complex<ld> OU a struct -> a struct eh mais rapida
 typedef complex<ld> base;
+
+struct base{
+  ld re, im;
+  
+  base(): re(0), im(0){}
+  base(ld re): re(re), im(0){}
+  base(ld re, ld im): re(re), im(im){}
+  
+  base operator+ (const base &rhs){
+    return base(re + rhs.re, im + rhs.im);
+  }
+  
+  base operator- (const base &rhs){
+    return base(re - rhs.re, im - rhs.im);
+  }
+  
+  base& operator *=(const base &rhs){
+    ld r = re*rhs.re - im * rhs.im,
+       i = im*rhs.re + re*rhs.im;
+    re = r;
+    im = i;
+    return *this;
+  }
+  
+  base operator* (const base &rhs){
+    return base(re*rhs.re - im * rhs.im, im*rhs.re + re*rhs.im);
+  }
+  
+  base& operator /=(const ld rhs){
+    re /= rhs;
+    im /= rhs;
+    return *this;
+  }
+  
+  ld real() const{ return re; }
+};
 
 const double PI = acos(-1.0);
 
