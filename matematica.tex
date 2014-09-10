@@ -61,7 +61,9 @@ Onde $k$ \'{e} a quantidade de itens na contagem da interse\c{c}\~{a}o.
 
 \subsubsection{Teorema de Lucas}
 
-${n \choose k} \bmod{p} = {n \bmod{p} \choose k \bmod{p}}$
+${n \choose k} \bmod{p} = {\left \lfloor{n/p}\right \rfloor \choose \left \lfloor{k/p}\right \rfloor} * {n \bmod{p} \choose k \bmod{p}} \bmod{p}$
+
+% http://www.cut-the-knot.org/arithmetic/algebra/LucasTheorem.shtml
 
 
 % % % % % % % % % % % % %
