@@ -10,3 +10,12 @@ double integrate(double a, double b, T f){
   if (fabs(l+r-tot) < eps) return tot;
   return integrate(a,m,f)+integrate(m,b,f);
 }
+
+// exemplo de implementacao de f(X)
+struct funcao{
+    double operator() (const double &x){
+        return x*x;
+    }
+} f;
+
+double ans = integrate(1.0,3.0,f);
