@@ -1,15 +1,18 @@
-inline bool cmp(line a, line b){
-  if(a == b){
-    return false;
+inline bool cmpActive(line a, line b){
+  if(a == b) return false; // if lines are the same, ignore
+
+  // checks if b.p1 is in the sector defined by a.p1 and a.p2
+  if(ccw(origin, a.p1, b.p1) && !ccw(origin, a.p2, b.p1)){
+    // if it is, checks if b.p1 is on the same side of line a as origin
+    return ccw(a.p1, a.p2, b.p1) !=  ccw(a.p1, a.p2, origin);
   }
-   
-  if(ccw(origin, a.first, b.first) && !ccw(origin, a.second, b.first)){
-    return ccw(a.first, a.second, b.first) !=  ccw(a.first, a.second, origin);
-  }
-  else if(ccw(origin, a.first, b.second) && !ccw(origin,a.second, b.second)){
-    return ccw(a.first,a.second, b.second) !=  ccw(a.first,a.second, origin);
+  else if(ccw(origin, a.p1, b.p2) && !ccw(origin, a.p2, b.p2)){
+    // if b.p1 isn't in the sector, but b.p2 is
+    return ccw(a.p1, a.p2, b.p2) !=  ccw(a.p1, a.p2, origin);
   }
   else{
-    return ccw(b.first, b.second, a.first) == ccw(b.first, b.second, origin);
+    // this was missing: when interval A is completely inside B, so we can
+    // choose any point of A we want
+    return ccw(b.p1, b.p2, a.p1) ==  ccw(b.p1, b.p2, origin);
   }
 }
