@@ -1,4 +1,4 @@
-int rotatingCalipers(){
+int rotatingCalipers(vector<point> &up, vector<point> &dn){
 	int ans = 0;
 	
 	int i = 0, j = dn.size()-1; 

@@ -1,7 +1,4 @@
-set<point> pts;
-vector<point> up, dn;
-
-void convexHull(){
+void convexHull(set<point> &pts, vector<point> &up, vector<point> &dn){
 	up.assign(pts.size(),point());
 	dn.assign(pts.size(),point());
 	int i = 0, j = 0;
