@@ -1,4 +1,4 @@
-ll rotatingCalipers(){
+int rotatingCalipers(){
 	int ans = 0;
 	
 	int i = 0, j = dn.size()-1; 
@@ -11,8 +11,8 @@ ll rotatingCalipers(){
 		else if(j == 0) i++;
 		else{
 			// Verifica qual o menor angulo a ser rotacionado p utilizar na rotacao
-			if((up[i+1].second - up[i].second) * (dn[j].first - dn[j-1].first)
-				> (dn[j].second - dn[j-1].second) * (up[i+1].first - up[i].first ))
+			if((up[i+1].y - up[i].y) * (dn[j].x - dn[j-1].x)
+				> (dn[j].y - dn[j-1].y) * (up[i+1].x - up[i].x ))
 				i++;
 			else
 				j--;

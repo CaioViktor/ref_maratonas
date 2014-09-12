@@ -1,3 +1,5 @@
+vector<point> chPts;
+
 // Pegar p[i] do convex hull, na seguinte ordem: minX, minY, maxX, maxY
 int p[4];
 
@@ -29,8 +31,8 @@ void rotatingCalipers(){
 	for(int i = 0; i < 4; i++)
 		p0[i] = p[(i+2)%4];
 	
-	double	ansAr = (chPts[p[2]].first - chPts[p[0]].first)*(chPts[p[3]].second - chPts[p[1]].second),
-			ansPer = 2*((chPts[p[2]].first - chPts[p[0]].first)+(chPts[p[3]].second - chPts[p[1]].second));
+	double	ansAr = (chPts[p[2]].x - chPts[p[0]].x)*(chPts[p[3]].y - chPts[p[1]].y),
+			ansPer = 2*((chPts[p[2]].x - chPts[p[0]].x)+(chPts[p[3]].y - chPts[p[1]].y));
 	double l1, l2;
 	while(1){
 		int incr = -1, ia, ib, ic, id, ie;
@@ -53,7 +55,7 @@ void rotatingCalipers(){
 		
 		point pc, pd;
 		// Implementacao do CP3: ultimo param recebe o ponto mais prox
-		// 						 em cima da reta
+		// em cima da reta
 		distToLine(chPts[ic], chPts[ia],chPts[ib], pc);
 		distToLine(chPts[id], chPts[ia],chPts[ib], pd);
 		l2 = sqrt(dist2(pc,pd));
