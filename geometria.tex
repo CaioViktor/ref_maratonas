@@ -97,11 +97,16 @@ Checa se o ponto $q$ est\'{a} no segmento $pr$
 
 % SWEEPLINE % % % % % % % % % % % % % % % % % % 
 
-\subsection{Sweepline}
+\subsection{Sorting}
 \subsubsection{Sort por \^{a}ngulo}
 Comparador para realizar sort por \^{a}ngulo. Bom porque n\~{a}o usa opera\c{c}\~{o}es com ponto flutuante.
 \Cpp{\detokenize{geometria/aleatorio/angle_sort}}
 %problema: UVa 12675 (Brasileira 2013)
+\divisor
+
+\subsubsection{Sort polar de segmentos de reta}
+Sort funciona quando \'{e} poss\'{i}vel tra\c{c}ar uma semi-reta partindo de "origin" e cortando ambos os segmentos.
+\Cpp{\detokenize{geometria/segmentos_e_linhas/point_segment_sort}}
 \divisor
 
 % TRIGONOMETRIA % % % % % % % % % % % % % % % %
