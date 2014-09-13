@@ -29,7 +29,8 @@ Caso tenha um n\'{o} $u$ que contenha outro n\'{o} $v$ no caminho entre $u$ e a 
 		Checar se o i-ésimo bit é 1 &	\texttt{(S \& (1 << i)) != 0} 	\\
 		Pegar o primeiro bit ligado	& 	\texttt{T = (S \& (-S))} 		\\
 		Ligar os primeiros n bits	& 	\texttt{S = (1 << n) - 1} 		\\
-		Desligar todos os bits		& 	\texttt{S = 0} 
+		Desligar todos os bits		& 	\texttt{S = 0} \\
+		Ver se um número é potência de 2 & \texttt{(x \& (x -1)) == 0}
 \end{tabular}
 
 \subsubsection{Combinações}
