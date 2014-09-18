@@ -5,6 +5,31 @@
 % % % % % % % % % % % % %
 \subsection{Teoria dos Números e Matemática Discreta}
 
+\subsubsection{Propriedades GCD}
+  \begin{itemize}
+    \item Every common divisor of a and b is a divisor of gcd(a, b).
+    \item $gcd(a, b)$, where $a$ and $b$ are not both zero, may be defined alternatively and equivalently as the smallest positive integer $d$ which can be written in the form $d = a·p + b·q$, where $p$ and $q$ are integers. This expression is called Bézout's identity. Numbers $p$ and $q$ like this can be computed with the extended Euclidean algorithm.
+    \item $gcd(a, 0) = |a|$, for $a \neq 0$, since any number is a divisor of $0$, and the greatest divisor of $a$ is $|a|$. This is usually used as the base case in the Euclidean algorithm.
+    \item If $a$ divides the product $b*c$, and $gcd(a, b) = d$, then $a/d$ divides $c$.
+    \item If $m$ is a non-negative integer, then $gcd(m*a, m*b)$ = $m*gcd(a, b)$.
+    \item If $m$ is any integer, then $gcd(a + m*b, b) = gcd(a, b)$.
+    \item If $m$ is a nonzero common divisor of $a$ and $b$, then $gcd(a/m, b/m) = gcd(a, b)/m$.
+    \item The gcd is a multiplicative function in the following sense: if $a_1$ and $a_2$ are relatively prime, then $gcd(a_1*a_2, b) = gcd(a1, b)*gcd(a2, b)$. In particular, recalling that gcd is a positive integer valued function (i.e, gets natural values only) we obtain that $gcd(a, b*c) = 1$ if and only if $gcd(a, b) = 1$ and $gcd(a, c) = 1$.
+    \item The gcd is a commutative function: $gcd(a, b) = gcd(b, a)$.
+    \item The gcd is an associative function: $gcd(a, gcd(b, c)) = gcd(gcd(a, b), c)$.
+    \item The gcd of three numbers can be computed as $gcd(a, b, c) = gcd(gcd(a, b), c)$, or in some different way by applying commutativity and associativity. This can be extended to any number of numbers.
+    \item $gcd(a, b)$ is closely related to the least common multiple $lcm(a, b)$: we have $gcd(a, b)*lcm(a, b) = a*b$. This formula is often used to compute least common multiples: one first computes the gcd with Euclid's algorithm and then divides the product of the given numbers by their gcd.
+    \item The following versions of distributivity hold true:
+    \begin{itemize}
+      \item $gcd(a, lcm(b, c)) = lcm(gcd(a, b), gcd(a, c))$
+      \item $lcm(a, gcd(b, c)) = gcd(lcm(a, b), lcm(a, c))$.
+    \end{itemize}
+    \item It is sometimes useful to define $gcd(0, 0) = 0$ and $lcm(0, 0) = 0$ because then the natural numbers become a complete distributive lattice with gcd as meet and lcm as join operation. This extension of the definition is also compatible with the generalization for commutative rings given below.
+    \item In a Cartesian coordinate system, $gcd(a, b)$ can be interpreted as the number of points with integral coordinates on the straight line joining the points $(0, 0)$ and $(a, b)$, excluding $(0, 0)$.
+  \end{itemize}
+\divisor
+
+
 \subsubsection{MMC}
 O MMC de dois n\'{u}meros pode ser calculado da seguinte forma:
 \\ Se:
