@@ -58,13 +58,12 @@ private:
     if(chainHead[chainNo] == -1) chainHead[chainNo] = u;
     chainInd[u] = chainNo; chainPos[u] = chainPtr++;
     
-    int ind = n, nc, v, w;
+    int ind = n, nc, v;
     for(int i = 0; i < (int) children[u].sz(); i++){
       v = children[u][i];
-      w = costs[u][i];
       if(tree_sz[v] > tree_sz[ind]){
         ind = v;
-        nc = w;
+        nc = costs[u][i];
       }
     }
     if(ind == n) return;
@@ -72,10 +71,9 @@ private:
     
     for(int i = 0; i < (int) children[u].sz(); i++){
       v = children[u][i];
-      w = costs[u][i];
       if(v != ind){
         chainNo++;
-        hld(v, w, children, costs);
+        hld(v, costs[u][i], children, costs);
       }
     }
   }
