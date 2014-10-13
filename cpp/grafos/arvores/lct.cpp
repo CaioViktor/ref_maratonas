@@ -1,15 +1,17 @@
 /* Baseado na implementacao do Sleator */
 class Node {
 public:
-    int s, my_s, id;
+    int id;
+    bool rev;
     Node *l, *r, *p;
     Node(){
       l = r = p = NULL;
+      rev = false;
     }
-    Node (int c, int i) {
+    Node (int i) {
       id = i;
-      s = my_s = c;
       l = r = p = NULL;
+      rev = false;
     }
 
     // se eh raiz de splay tree
@@ -17,15 +19,16 @@ public:
       return p==NULL || (p->l != this && p->r != this);
     }
     
-    // "Push" a alteraçao para os filhos
+    /* If this node is flipped, we unflip it, and push the change
+       down the tree, so that it represents the same thing. */
     void normalize() {
-      //if (flip) {
-          //flip = false;
-          //on = s-on;
-          //my_flip = !my_flip;
-          //if (l != NULL) l->flip = !l->flip;
-          //if (r != NULL) r->flip = !r->flip;
-      //}
+      if (rev) {
+          rev = false;
+          swap(l,r);
+          
+          if (l != NULL) l->rev ^= 1;
+          if (r != NULL) r->rev ^= 1;
+      }
     }
 
     /* The tree structure has changed in the vicinity of this node
@@ -33,66 +36,55 @@ public:
        child in a rotation).  This function fixes up the data fields
        in the node to maintain invariants. */
     void update() {
-      //s = my_s;
-      //if (l != NULL) {
-          //s += l->s;
-      //}
-      //if (r != NULL) {
-          //s += r->s;
-      //}
+      
     }
 };
 
 namespace LinkCut{
-    inline void rotR (Node *p) {
-      Node *q = p->p;
-      Node *r = q->p;
-      q->normalize();
-      p->normalize();
-      if ((q->l=p->r) != NULL) q->l->p = q;
-      p->r = q;
-      q->p = p;
-      if ((p->p=r) != NULL) {
-          if (r->l == q) r->l = p;
-          else if (r->r == q) r->r = p;
-      }
-      q->update();
-    }
+  inline void connect(Node *ch, Node *p){
+    if (ch != NULL)
+      ch->p = p;
+  }
+  inline void connect(Node *ch, Node *p, bool isLeftChild) {
+    connect(ch,p);
+    if (isLeftChild)
+      p->l = ch;
+    else
+      p->r = ch;
+  }
 
-    inline void rotL (Node *p) {
-      Node *q = p->p;
-      Node *r = q->p;
-      q->normalize();
-      p->normalize();
-      if ((q->r=p->l) != NULL) q->r->p = q;
-      p->l = q;
-      q->p = p;
-      if ((p->p=r) != NULL) {
-          if (r->l == q) r->l = p;
-          else if (r->r == q) r->r = p;
-      }
-      q->update();
-    }
+  inline void rotate(Node * x) {
+    Node *p = x->p;
+    Node *g = p->p;
+    bool isRootP = p->isroot();
+    bool leftChildX = (x == p->l);
 
-    inline void splay(Node *p) {
-      while (!p->isroot()) {
-        Node *q = p->p;
-        if (q->isroot()) {
-          if (q->l == p) rotR(p); else rotL(p);
-        } else {
-          Node *r = q->p;
-          if (r->l == q) {
-            if (q->l == p) {rotR(q); rotR(p);}
-            else {rotL(p); rotR(p);}
-          } else {
-              if (q->r == p) {rotL(q); rotL(p);}
-              else {rotR(p); rotL(p);}
-          }
-        }
-      }
-      p->normalize(); // only useful if p was already a root.
-      p->update();    // only useful if p was not already a root
+    // create 3 edges: (x.r(l),p), (p,x), (x,g)
+    connect(leftChildX ? x->r : x->l, p, leftChildX);
+    connect(p, x, !leftChildX);
+    if(!isRootP)
+      connect(x, g, p == g->l);
+    else
+      connect(x,g);
+    p->normalize();
+    p->update();
+  }
+
+  inline void splay(Node * x) {
+    while (!x->isroot()) {
+      Node * p = x->p;
+      Node * g = p->p;
+      if (!p->isroot())
+        g->normalize();
+      p->normalize();
+      x->normalize();
+      if (!p->isroot())
+        rotate((x == p->l) == (p == g->l) ? p/*zig-zig*/ : x/*zig-zag*/);
+      rotate(x);
     }
+    x->normalize();
+    x->update();
+  }
 
     /* This makes node q the root of the virtual tree, and also q is the 
        leftmost node in its splay tree */
@@ -102,26 +94,49 @@ namespace LinkCut{
           splay(p);
           
           p->l = r;
-          p->update();
           r = p;
       };
       splay(q);
       return r;
     }
 
+    /*
+     * Para arvores genericas
+     * */
+    inline void makeRoot(Node *p){
+      expose(p);
+      p->rev = !p->rev;
+      p->normalize();
+    }
+
     /* assuming p and q are nodes in different trees and  
        that p is a root of its tree, this links p to q */ 
     inline void link(Node *p, Node *q) {
-      expose(p);
-      //assert(p->r == NULL);
+      makeRoot(p); // Quando arvore eh generica
+      expose(p); // quando arvore eh rooteada
+      
       expose(q);
       p->p = q;
     }
 
+    /**
+     * Metodo para arvore rooteada
+     * */
     inline void cut(Node *p){
       expose(p);
       p->r->p = NULL;
       p->r = NULL;
+    }
+
+    /**
+     * Metodo para arvore generica
+     * */
+    inline void cut(Node *p, Node *q){
+      makeRoot(p);
+      expose(q);
+      assert(p->r != NULL);
+      q->r->p = NULL;
+      q->r = NULL;
     }
 
     /* this returns the id of the node that is the root of the tree containing p */
@@ -130,13 +145,6 @@ namespace LinkCut{
       while(p->r != NULL) p = p->r;
       splay(p);
       return p->id;
-    }
-    
-    inline int lca(Node *p, Node *q){
-      expose(p);
-      Node *r = expose(q);
-      if(r == NULL) return q->id;
-      return r->id;
     }
 };
 

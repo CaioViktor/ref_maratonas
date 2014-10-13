@@ -1,6 +1,6 @@
 class LCA{
 private:
-  int L[2*MAXN], E[2*MAXN], H[MAXN], idx, st[4*MAXN], n;
+  int L[2*MAXN], E[2*MAXN], H[MAXN], idx, st[8*MAXN], n;
 
   void dfs(int cur, int depth, vvi & children) {
     H[cur] = idx;
@@ -38,7 +38,7 @@ private:
 public:
   void build(vvi & children){
     idx = 0;
-    n = children.sz()*2 - 1;
+    n = idx - 1;
     memset(H, -1, sizeof H);
     dfs(0, 0, children);
     build_tree(1,0, n, children);
