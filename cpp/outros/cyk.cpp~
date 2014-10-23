@@ -1,7 +1,0 @@
-// Pra cada regra sozinha, inciializa table[n_regra][1] = true
-// Inicializa o resto como false
-
-for (int i=2; i<=C; i++) //Tamanho da string
-    for (int j=0; j<C-i+1; j++) //Início da string
-	for (int k=1; k<=i-1; k++) //Tamanho da primeira partição
-	    table[j][i] = (table[j][k] && table[j+k][i-k]);
