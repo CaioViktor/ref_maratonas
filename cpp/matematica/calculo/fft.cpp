@@ -20,19 +20,19 @@ namespace FFT{
       }
   };
 
-  Complex wn[2][19];
+  Complex wn[2][MAXLGN];
 
   void init(){
-    for(int i = 1,M = 2;i <= 20;++i,M <<= 1){
-        wn[0][i] = Complex(cos(-2 * M_PI / M), sin(-2 * M_PI / M));;
-        wn[1][i] = Complex(cos(2 * M_PI / M), sin(2 * M_PI / M));;
+    for(int i = 1,M = 2;i < MAXLGN; ++i,M <<= 1){
+        wn[0][i] = Complex(cos(-2 * M_PI / M), sin(-2 * M_PI / M));
+        wn[1][i] = Complex(cos(2 * M_PI / M), sin(2 * M_PI / M));
     }
   }
 
+  Complex a[MAXN];
   void fft(int n, Complex A[], int s){
       int p = __builtin_ctz(n);
       
-      Complex a[n];
       for(int i = 0;i < n;++i) a[i] = A[i];
       
       for(int i = 0;i < n;++i){
@@ -93,7 +93,3 @@ namespace FFT{
       for(int i = 0; i < nR; i++) R_[i] = ll (R[i].x + .5);
   }
 }
-
-// ANTES DE USAR: FFT::init()
-// Lembrar que MAXN deve ser 2x maior que a menor pot. de 2 maior que o
-// tamanho maximo de P e Q
