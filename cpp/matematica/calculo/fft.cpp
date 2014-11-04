@@ -1,93 +1,99 @@
-typedef long double ld;
+namespace FFT{
+  struct Complex{
+      double x,y;
+      
+      Complex(){}
+      Complex(double _x, double _y):
+          x(_x), y(_y){}
+      
+      void operator += (Complex &c){
+          x += c.x; y += c.y;
+      }
+      
+      Complex& operator -= (Complex &c){
+          x -= c.x; y -= c.y;
+          return *this;
+      }
+      
+      Complex operator * (Complex &c){
+          return Complex(x * c.x - y * c.y,x * c.y + y * c.x);
+      }
+  };
 
-// usar o complex<ld> OU a struct -> a struct eh mais rapida
-typedef complex<ld> base;
+  Complex wn[2][19];
 
-struct base{
-  ld re, im;
-  
-  base(): re(0), im(0){}
-  base(ld re): re(re), im(0){}
-  base(ld re, ld im): re(re), im(im){}
-  
-  base operator+ (const base &rhs){
-    return base(re + rhs.re, im + rhs.im);
+  void init(){
+    for(int i = 1,M = 2;i <= 20;++i,M <<= 1){
+        wn[0][i] = Complex(cos(-2 * M_PI / M), sin(-2 * M_PI / M));;
+        wn[1][i] = Complex(cos(2 * M_PI / M), sin(2 * M_PI / M));;
+    }
   }
-  
-  base operator- (const base &rhs){
-    return base(re - rhs.re, im - rhs.im);
-  }
-  
-  base& operator *=(const base &rhs){
-    ld r = re*rhs.re - im * rhs.im,
-       i = im*rhs.re + re*rhs.im;
-    re = r;
-    im = i;
-    return *this;
-  }
-  
-  base operator* (const base &rhs){
-    return base(re*rhs.re - im * rhs.im, im*rhs.re + re*rhs.im);
-  }
-  
-  base& operator /=(const ld rhs){
-    re /= rhs;
-    im /= rhs;
-    return *this;
-  }
-  
-  ld real() const{ return re; }
-};
 
-const double PI = acos(-1.0);
+  void fft(int n, Complex A[], int s){
+      int p = __builtin_ctz(n);
+      
+      Complex a[n];
+      for(int i = 0;i < n;++i) a[i] = A[i];
+      
+      for(int i = 0;i < n;++i){
+          int rev = 0;
+          
+          for(int j = 0;j < p;++j){
+              rev <<= 1;
+              rev |= ((i >> j) & 1);
+          }
+          
+          A[i] = a[rev];
+      }
+      
+      Complex w,aux;
+      int M = 2,K = 1;
+      
+      for(int i = 1;i <= p;++i,M <<= 1,K <<= 1){
+          aux = wn[s == -1? 0 : 1][i];
+          
+          for(int j = 0;j < n;j += M){
+              w = Complex(1,0);
+              
+              for(int l = j;l < K+j;++l){
+                  Complex t = w * A[l + K],u = A[l];
+                  
+                  A[l] += t;
+                  u -= t;
+                  A[l + K] = u;
+                  w = w * aux;
+              }
+          }
+      }
+      
+      if(s == -1)
+          for(int i = 0;i < n;++i)
+              A[i].x /= n, A[i].y /= n;;
+  }
 
-void fft (vector<base> & a, bool invert)
-{
-	ll n = (int) a.size();
+  int nR;
+  Complex P[MAXN], Q[MAXN];
+  Complex R[MAXN];
+  void mult(ll nP, const ll (&P_) [MAXN], ll nQ, const ll (&Q_) [MAXN], ll (&R_) [MAXN]){
+      for(int i = 0; i < nP; i++) P[i] = Complex(P_[i], 0);
+      for(int i = 0; i < nQ; i++) Q[i] = Complex(Q_[i], 0);
+      nR = nP + nQ;
+      while(__builtin_popcount(nR) > 1) nR += nR & -nR;
 
-	for (int i=1, j=0; i<n; ++i) {
-		int bit = n >> 1;
-		for (; j>=bit; bit>>=1)
-			j -= bit;
-		j += bit;
-		if (i < j)
-			swap (a[i], a[j]);
-	}
-
-	for (int len=2; len<=n; len<<=1) {
-		ld ang = 2*PI/len * (invert ? -1 : 1);
-		base wlen (cos(ang), sin(ang));
-		for (int i=0; i<n; i+=len) {
-			base w (1);
-			for (int j=0; j<len/2; ++j) {
-				base u = a[i+j],  v = a[i+j+len/2] * w;
-				a[i+j] = u + v;
-				a[i+j+len/2] = u - v;
-				w *= wlen;
-			}
-		}
-	}
-	if (invert)
-		for (int i=0; i<n; ++i)
-			a[i] /= n;
+      for(int i = nP;i < nR;++i) P[i] = Complex(0,0);
+      for(int i = nQ;i < nR;++i) Q[i] = Complex(0,0);
+      
+      fft(nR,P,1);
+      fft(nR,Q,1);
+      
+      for(int i = 0;i < nR;i++) R[i] = P[i] * Q[i];
+      
+      fft(nR,R,-1);
+      
+      for(int i = 0; i < nR; i++) R_[i] = ll (R[i].x + .5);
+  }
 }
 
-
-// Exemplo de utilizacao: multiplicacao de dois polinomios A e B em O(n log n)
-void multiply (const vector<ll> & a, const vector<ll> & b, vector<ll> & res)
-{
-	vector<base> fa (a.begin(), a.end()),  fb (b.begin(), b.end());
-	size_t n = 1;
-	// n deve ser a menor potencia de 2 >= grau dos polinomios
-	while (n < max (a.size(), b.size()))  n <<= 1;
-	n <<= 1; // multiplica por 2 (G(P*Q) = G(P)+G(Q))
-	fa.resize (n),  fb.resize (n);
-
-	fft (fa, false),  fft (fb, false); // FFT dos polinomios
-	for (size_t i=0; i<n; ++i)
-		fa[i] *= fb[i];
-	fft (fa, true); // FFT inverso da multiplicacao
-	res.resize (n);
-	for (size_t i=0; i<n; ++i)
-		res[i] = ll (fa[i].real() + 0.5);
-}
+// ANTES DE USAR: FFT::init()
+// Lembrar que MAXN deve ser 2x maior que a menor pot. de 2 maior que o
+// tamanho maximo de P e Q

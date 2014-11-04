@@ -69,3 +69,29 @@ inline int signedA2(vector<point> &pts){
   }
   return S;
 }
+
+
+inline bool outsidePol(int i, int j, vp & pts){
+ //Checks if diagonal is inside or outside polygon:
+ //If polygon is in CCW order, vector ij should be between ia and ib
+ //when going from ia to ib in CW order
+  int N = pts.size();
+
+  int a = (i+N-1)%N, b = (i+1)%N;
+  
+  if(a == j || b == j) return false;
+  
+  vec ia = pts[a] - pts[i],
+      ib = pts[b] - pts[i],
+      ij = pts[j] - pts[i];
+  
+   Orientations
+  int ab = orientation(ia,ib),
+      aj = orientation(ia,ij),
+      bj = orientation(ib,ij);
+      
+  if(ab == 1) return aj < 0 || bj > 0;
+  else if(ab <= 0) return aj < 0 && bj > 0;
+  
+  return false;
+}
