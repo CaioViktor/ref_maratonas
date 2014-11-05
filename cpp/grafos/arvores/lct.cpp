@@ -29,6 +29,7 @@ public:
           if (l != NULL) l->rev ^= 1;
           if (r != NULL) r->rev ^= 1;
       }
+      // Lazy propagation aqui
     }
 
     /* The tree structure has changed in the vicinity of this node
@@ -36,7 +37,8 @@ public:
        child in a rotation).  This function fixes up the data fields
        in the node to maintain invariants. */
     void update() {
-      
+      // Node update aqui
+      // Considerar vizinhos com o valor calculado
     }
 };
 
