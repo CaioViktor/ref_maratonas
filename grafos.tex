@@ -68,3 +68,17 @@ Classe pra facilitar a vida
 \subsubsection{Link Cut Tree}
 \Cpp{\detokenize{grafos/arvores/lct}}
 \divisor
+
+\subsection{Outros}
+\subsubsection{Matriz Laplaciana}
+Construida da seguinte forma:
+
+\begin{itemize}
+\item Se $i = j$, $a_{ij}=deg(i)$;
+\item Se $i \neq j$ e $i$ é vizinho de $j$, $a_{ij}=-1$
+\item Se $i \neq j$ e $i$ não é vizinho de $j$, $a_{ij}=0$
+\end{itemize}
+
+\subsubsection{Teorema de Kirchhoff}
+Dada uma matriz Laplaciana de um grafo, a quantidade de spanning trees do grafo é o determinante de um cofator qualquer da matriz.
+\divisor
